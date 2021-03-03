@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[4]:
 
 
 import numpy as np
+import os
 
 # More prone to be changed
 field = '3' # 3 -- MN, 4 -- MS, 5 -- SDS.
@@ -57,28 +58,31 @@ for i in range(len(starts)):
     n_fchan = str(start)+'-'+str(start+128-1)
     imagename= n_const+n_fchan
     
-    print('Imaging cube '+str(i)+' out of '+str(total_cubes))
-    print('Frequency channels are: '+n_fchan)
-    
-    tclean(
-    vis=vis
-    field=field
-    spw=spw
-    start=start
-    imagename=imagename
-    imsize=imsize
-    cell=cell
-    specmode=specmode
-    outframe=outframe
-    restfreq=restfreq
-    perchanweightdensity=perchanweightdensity
-    chanchunks=chanchunks
-    pblimit=pblimit
-    weighting=weighting
-    robust=robust
-    niter=niter
-    threshold=threshold
-    interactive=interactive
-    savemodel=savemodel
-    nchan=nchan)
+    if not os.path.exists(imagename): 
+        print('Imaging cube '+str(i)+' out of '+str(total_cubes))
+        print('Frequency channels are: '+n_fchan)
+
+        tclean(
+        vis=vis
+        field=field
+        spw=spw
+        start=start
+        imagename=imagename
+        imsize=imsize
+        cell=cell
+        specmode=specmode
+        outframe=outframe
+        restfreq=restfreq
+        perchanweightdensity=perchanweightdensity
+        chanchunks=chanchunks
+        pblimit=pblimit
+        weighting=weighting
+        robust=robust
+        niter=niter
+        threshold=threshold
+        interactive=interactive
+        savemodel=savemodel
+        nchan=nchan)
+    else:
+        print('Cube '+imagename+' already exists. Skipped.')
 
