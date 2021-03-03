@@ -48,41 +48,58 @@ starts = np.arange(150, 3071, 128)[:-1] # First non empty channel is 154, but I 
 # Remove the last starting channel as that cube will only include empty channels.
 
 
-# In[3]:
+# In[7]:
+
+
+os.path.exists('/Users/nbudaiev/GitHub/SgrB2_ALMA_H2O/cut_cube_clean.py')
+
+
+# In[8]:
 
 
 print('Setup completed')
 total_cubes = len(starts)
+path = '/orange/adamginsburg/sgrb2/18A-229/NB/'
 for i in range(len(starts)):
     start = starts[i]
     n_fchan = str(start)+'-'+str(start+128-1)
     imagename= n_const+n_fchan
+    full_path = path+imagename+'.image'
     
-    if not os.path.exists(imagename): 
+    print('The full path is: ')
+    print(full_path)
+    
+    if not os.path.exists(full_path): 
         print('Imaging cube '+str(i)+' out of '+str(total_cubes))
         print('Frequency channels are: '+n_fchan)
 
         tclean(
-        vis=vis
-        field=field
-        spw=spw
-        start=start
-        imagename=imagename
-        imsize=imsize
-        cell=cell
-        specmode=specmode
-        outframe=outframe
-        restfreq=restfreq
-        perchanweightdensity=perchanweightdensity
-        chanchunks=chanchunks
-        pblimit=pblimit
-        weighting=weighting
-        robust=robust
-        niter=niter
-        threshold=threshold
-        interactive=interactive
-        savemodel=savemodel
+        vis=vis,
+        field=field,
+        spw=spw,
+        start=start,
+        imagename=imagename,
+        imsize=imsize,
+        cell=cell,
+        specmode=specmode,
+        outframe=outframe,
+        restfreq=restfreq,
+        perchanweightdensity=perchanweightdensity,
+        chanchunks=chanchunks,
+        pblimit=pblimit,
+        weighting=weighting,
+        robust=robust,
+        niter=niter,
+        threshold=threshold,
+        interactive=interactive,
+        savemodel=savemodel,
         nchan=nchan)
     else:
         print('Cube '+imagename+' already exists. Skipped.')
+
+
+# In[ ]:
+
+
+
 
