@@ -8,7 +8,7 @@ import numpy as np
 import os
 
 # More prone to be changed
-field = '3' # 3 -- MN, 4 -- MS, 5 -- SDS.
+field = '4' # 3 -- MN, 4 -- MS, 5 -- SDS.
 niter=1000
 threshold='5.0mJy'
 nchan=128 # number of frequency channels to be cleaned per 1 file 
@@ -48,13 +48,7 @@ starts = np.arange(150, 3071, 128)[:-1] # First non empty channel is 154, but I 
 # Remove the last starting channel as that cube will only include empty channels.
 
 
-# In[7]:
-
-
-os.path.exists('/Users/nbudaiev/GitHub/SgrB2_ALMA_H2O/cut_cube_clean.py')
-
-
-# In[8]:
+# In[ ]:
 
 
 print('Setup completed')
@@ -70,7 +64,7 @@ for i in range(len(starts)):
     print(full_path)
     
     if not os.path.exists(full_path): 
-        print('Imaging cube '+str(i)+' out of '+str(total_cubes))
+        print('Imaging cube '+str(i+1)+' out of '+str(total_cubes))
         print('Frequency channels are: '+n_fchan)
 
         tclean(
